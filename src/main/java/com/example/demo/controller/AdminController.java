@@ -96,6 +96,7 @@ public class AdminController {
 	@GetMapping("/activateUser/{username}")
 	public String activate(@PathVariable("username") String username, RedirectAttributes flash) {
 		int i = userService.activate(username);
+		System.out.println(i);
 		if (i == 1) {
 			flash.addFlashAttribute("success", "User activate successfully");
 		} else if (i == 0) {
