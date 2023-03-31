@@ -39,9 +39,14 @@
                             	<i class="fa-solid fa-trash" aria-hidden=true></i>
                             </button>
 						</a> 
-						<a th:href="@{/users/activateUser/}+ ${user.username}">
-							<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Activar alumno">
+						<a th:href="@{/users/activateUser/}+ ${user.username}" th:if="${user.enabled == true}">
+							<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Desactivar user">
 								<i class="fas fa-user-times"> </i>
+							</button>
+						</a>
+						<a th:href="@{/users/activateUser/}+ ${user.username}" th:if="${user.enabled == false}">
+							<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Activar user">
+								<i class="fa-solid fa-user-check"></i>
 							</button>
 						</a>
 					</th>

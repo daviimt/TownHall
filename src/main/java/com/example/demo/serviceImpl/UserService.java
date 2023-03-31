@@ -26,7 +26,6 @@ public class UserService implements UserDetailsService {
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -36,15 +35,15 @@ public class UserService implements UserDetailsService {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		user.setEnabled(true);
 		user.setRole("ROLE_MANAGER");
-		
+
 		return userRepository.save(user);
 	}
-	
+
 	public com.example.demo.entity.User register(com.example.demo.entity.User user) {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		user.setEnabled(true);
 		user.setRole("ROLE_USER");
-		
+
 		return userRepository.save(user);
 	}
 
@@ -67,16 +66,16 @@ public class UserService implements UserDetailsService {
 	public com.example.demo.entity.User findUser(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	public com.example.demo.entity.User findUserId(int id) {
 		return userRepository.findById(id);
 	}
-	
+
 	public int activate(String username) {
-		int a=0;
+		int a = 0;
 		System.out.println(username);
-		com.example.demo.entity.User u=userRepository.findByUsername(username);
-		com.example.demo.entity.User user=new com.example.demo.entity.User();
+		com.example.demo.entity.User u = userRepository.findByUsername(username);
+		com.example.demo.entity.User user = new com.example.demo.entity.User();
 		System.out.println(u);
 		user.setId(u.getId());
 		user.setUsername(u.getUsername());
@@ -87,28 +86,32 @@ public class UserService implements UserDetailsService {
 		user.setRole(u.getRole());
 		user.setId_department(u.getId());
 		user.setAppointmentsList(u.getAppointmentsList());
-		
-		if(u.isEnabled()==false) {
+
+		if (u.isEnabled() == false) {
 			user.setEnabled(true);
-			a=1;
-		}else {
+			a = 1;
+		} else {
 			user.setEnabled(false);
-			a=0;
+			a = 0;
 		}
-		
+
 		userRepository.save(user);
 		return a;
 	}
-	
+
 	public void deleteUser(String username) throws Exception {
 		com.example.demo.entity.User u = userRepository.findByUsername(username);
 		userRepository.delete(u);
 	}
-	
+
 	public List<com.example.demo.entity.User> listAllUsuarios() {
-		return userRepository.findAll().stream().collect(Collectors.toList());
+		List<com.example.demo.entity.User> list = userRepository.findAll().stream().collect(Collectors.toList());
+		List<com.example.demo.entity.User> listwithoutAdmin = list.stream()
+				.filter(x -> x.getRole().equals("ROLE_USER") || x.getRole().equals("ROLE_GESTOR"))
+				.collect(Collectors.toList());
+		return listwithoutAdmin;
 	}
-	
+
 	public com.example.demo.entity.User updateUser(com.example.demo.entity.User user) {
 		return userRepository.save(user);
 	}

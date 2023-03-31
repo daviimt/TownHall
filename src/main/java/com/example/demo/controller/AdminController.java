@@ -4,8 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +19,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.serviceImpl.UserService;
+
+import jakarta.validation.constraints.AssertFalse.List;
 
 @Controller
 @RequestMapping("/users")
