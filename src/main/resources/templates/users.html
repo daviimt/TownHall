@@ -49,6 +49,11 @@
 								<i class="fa-solid fa-user-check"></i>
 							</button>
 						</a>
+						<a th:href="@{/users/formUser/}+ ${user.username}" >
+							<button type="button" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title="Desactivar user">
+								<i class="fa-solid fa-pen-to-square"></i>
+							</button>
+						</a>
 					</th>
 				</tr>
 			</tbody>
