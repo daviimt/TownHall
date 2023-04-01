@@ -20,8 +20,6 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.serviceImpl.UserService;
 
-import jakarta.validation.constraints.AssertFalse.List;
-
 @Controller
 @RequestMapping("/users")
 public class AdminController {
@@ -49,18 +47,27 @@ public class AdminController {
 	@PostMapping("/addManager")
 	public String addManager(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
 			RedirectAttributes flash, Model model) {
-		if(user.getId()==0) {
-			userService.registerManager(user);
-			flash.addFlashAttribute("success", "Manager created successfully");
-			
-		}else {
+		if (user.getId() == 0) {
+			User userExist = userService.registerManager(user);
+			if (userExist != null) {
+				flash.addFlashAttribute("success", "Manager created successfully");
+
+			} else {
+				flash.addFlashAttribute("error", "Username exist");
+				return "redirect:/users/formUser?error";
+			}
+
+		} else {
 			userService.updateUser(user);
-			flash.addFlashAttribute("success", "Manager updated successfully");
+			if (user.getRole().equals("ROLE_USER"))
+				flash.addFlashAttribute("success", "User updated successfully");
+			else
+				flash.addFlashAttribute("success", "Manager updated successfully");
 		}
 		return "redirect:/users/listUsers";
 
 	}
-	
+
 	@PostMapping("/addUser")
 	public String addUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
 			RedirectAttributes flash, Model model) {
@@ -70,13 +77,18 @@ public class AdminController {
 
 	}
 
-	@GetMapping("/formUser/{username}")
+	@GetMapping(value = { "/formUser", "/formUser/{username}" })
 	public String formUser(@PathVariable(name = "username", required = false) String username, Model model) {
-		model.addAttribute("user", userService.findUser(username));
+		if (username != null) {
+			model.addAttribute("user", userService.findUser(username));
+
+		} else {
+			model.addAttribute("user", new User());
+		}
 
 		return FORM_VIEW;
 	}
-	
+
 	// Metodo para borrar
 	@GetMapping("/deleteUser/{id}")
 	public String removeCurso(@PathVariable("id") int id, RedirectAttributes flash) {

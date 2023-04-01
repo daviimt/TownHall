@@ -32,6 +32,12 @@ public class UserService implements UserDetailsService {
 	}
 
 	public com.example.demo.entity.User registerManager(com.example.demo.entity.User user) {
+		List<com.example.demo.entity.User>usuarios=userRepository.findAll();
+		for(com.example.demo.entity.User u: usuarios) {
+			if(u.getUsername().equals(u.getUsername())) {
+				return null;
+			}
+		}
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		user.setEnabled(true);
 		user.setRole("ROLE_MANAGER");
@@ -40,6 +46,12 @@ public class UserService implements UserDetailsService {
 	}
 
 	public com.example.demo.entity.User register(com.example.demo.entity.User user) {
+		List<com.example.demo.entity.User>usuarios=userRepository.findAll();
+		for(com.example.demo.entity.User u: usuarios) {
+			if(u.getUsername().equals(u.getUsername())) {
+				return null;
+			}
+		}
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		user.setEnabled(true);
 		user.setRole("ROLE_USER");
@@ -107,7 +119,7 @@ public class UserService implements UserDetailsService {
 	public List<com.example.demo.entity.User> listAllUsuarios() {
 		List<com.example.demo.entity.User> list = userRepository.findAll().stream().collect(Collectors.toList());
 		List<com.example.demo.entity.User> listwithoutAdmin = list.stream()
-				.filter(x -> x.getRole().equals("ROLE_USER") || x.getRole().equals("ROLE_GESTOR"))
+				.filter(x -> x.getRole().equals("ROLE_USER") || x.getRole().equals("ROLE_MANAGER"))
 				.collect(Collectors.toList());
 		return listwithoutAdmin;
 	}
