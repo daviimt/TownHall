@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th=http://www.thymeleaf.org
+<html lang="en" xmlns:th=http://www.thymeleaf.org
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.css">
-<link rel="icon" th:href="@{/icons/favicon.png}">
-<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-<title>Login</title>
-</head>
-<body>
-	<div th:replace="~{fragments :: header}"></div>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Freelancer - Start Bootstrap Theme</title>
+        <!-- Favicon-->
+        <link rel="icon" th:href="@{/icons/favicon.png}">
+        <!-- Font Awesome icons (free version)-->
+        <script th:src="@{/https://use.fontawesome.com/releases/v6.3.0/js/all.js}" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link th:href="@{/https://fonts.googleapis.com/css?family=Montserrat:400,700}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+    <div th:replace="~{fragments :: header}"></div>
+<br>
+	<br>
+<br>
 	<br>
 	<div style="text-align:center;width: 500px;margin: auto;">
 	<h1>Login</h1>
@@ -28,6 +40,5 @@
 			<div th:if="${logout!=null}" class="alert alert-success" role="alert">Logout successfully</div>
 			<button type="submit" class="btn btn-primary">Login</button>
 	</form>
-	<br>
-<br><br><br>
+    </body>
 </html>
