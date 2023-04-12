@@ -46,9 +46,10 @@ public class AdminController {
 
 	@PostMapping("/addManager")
 	public String addManager(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
-			RedirectAttributes flash, Model model) {
+							 RedirectAttributes flash, Model model) {
 		if (user.getId() == 0) {
 			User userExist = userService.registerManager(user);
+			System.out.println(userExist);
 			if (userExist != null) {
 				flash.addFlashAttribute("success", "Manager created successfully");
 
@@ -70,7 +71,7 @@ public class AdminController {
 
 	@PostMapping("/addUser")
 	public String addUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
-			RedirectAttributes flash, Model model) {
+						  RedirectAttributes flash, Model model) {
 		userService.updateUser(user);
 		flash.addFlashAttribute("success", "Manager updated successfully");
 		return "redirect:/users/listUsers";
