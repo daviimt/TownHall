@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
 	public com.example.demo.entity.User registerManager(com.example.demo.entity.User user) {
 		List<com.example.demo.entity.User>usuarios=userRepository.findAll();
 		for(com.example.demo.entity.User u: usuarios) {
-			if(u.getUsername().equals(u.getUsername())) {
+			if(u.getUsername().equals(user.getUsername())) {
 				return null;
 			}
 		}
