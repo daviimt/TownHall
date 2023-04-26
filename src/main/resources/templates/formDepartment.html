@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Freelancer - Start Bootstrap Theme</title>
+        <!-- Favicon-->
+        <link rel="icon" th:href="@{/icons/favicon.png}">
+        <!-- Font Awesome icons (free version)-->
+        <script th:src="@{/https://use.fontawesome.com/releases/v6.3.0/js/all.js}" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link th:href="@{/https://fonts.googleapis.com/css?family=Montserrat:400,700}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+	<div th:replace="~{fragments :: header}"></div>
+	<br>
+	<br>
+	<br>
+	<form th:action="@{/departments/addDepartment}" th:object="${department}"
+		method="post" style="text-align: center; width: 500px; margin: auto;">
+
+		<h1 th:text="${department.id != 0} ? 'Edit Department' : 'New Department'">New Department</h1>
+
+		<input type="hidden" th:field="*{id}" id="id" th:if="*{id!=0}">
+		<div class="form-group">
+			<label>Name: </label> <input type="text" class="form-control"
+				th:field="*{name}" placeholder="NAME" id="name" required />
+		</div>
+		<br>
+		<div class="form-group">
+			<label>Description: </label> <input type="text" class="form-control"
+				th:field="*{description}" placeholder="Description" id="description" required />
+		</div>
+
+
+		<br> <input type="submit" class="btn btn-primary"> <a
+			sec:authorize="hasAuthority('ROLE_ADMIN')"
+			th:href="@{/departments/listDepartments}">
+			<button type="button" class="btn btn-primary">Back</button>
+		</a> <a sec:authorize="hasAuthority('ROL_PROFESOR')" th:href="@{/home/}">
+			<button type="button" class="btn btn-primary">Regresar</button>
+		</a>
+	</form>
+	<br>
+	<br>
+	<div class="alert alert-success" th:if="${success != null}"
+		th:text="${success}"></div>
+	<div class="alert alert-warning" th:if="${warning != null}"
+		th:text="${warning}"></div>
+	<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+
+    </body>
+</html>

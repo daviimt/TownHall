@@ -32,10 +32,6 @@ public class AdminController {
 	@Qualifier("userService")
 	private UserService userService;
 
-	@Autowired
-	@Qualifier("userRepository")
-	private UserRepository usuarioRepository;
-
 	// Mostrar profesores
 	@GetMapping("/listUsers")
 	public ModelAndView listUsers() {

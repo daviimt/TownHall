@@ -15,5 +15,5 @@ public class DepartmentDTO {
 
 	private int id;
 	private String name;
-	private int description;
+	private String description;
 }
