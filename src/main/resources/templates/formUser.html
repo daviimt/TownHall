@@ -23,7 +23,7 @@
 	<br>
 	<br>
 	<br>
-	<form th:action="@{/users/addManager}" th:object="${user}"
+	<form th:action="${user.id != 0} ? @{/users/addManagerWP} : @{/users/addManager}" th:object="${user}"
 		method="post" style="text-align: center; width: 500px; margin: auto;">
 
 		<h1 th:text="${user.id != 0} ? 'Edit User' : 'New User'">New User</h1>

@@ -28,4 +28,7 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
 	private List<Appointment> appointmentsList;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id_manager")
+	private List<Appointment> appointmentsListManager;
 }

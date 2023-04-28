@@ -68,6 +68,31 @@ public class AdminController {
 
 	}
 
+	@PostMapping("/addManagerWP")
+	public String addManagerWP(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
+							 RedirectAttributes flash, Model model) {
+		if (user.getId() == 0) {
+			User userExist = userService.registerManager(user);
+			System.out.println(userExist);
+			if (userExist != null) {
+				flash.addFlashAttribute("success", "Manager created successfully");
+
+			} else {
+				flash.addFlashAttribute("error", "Username exist");
+				return "redirect:/users/formUser?error";
+			}
+
+		} else {
+			userService.updateUserWhithoutPassword(user);
+			if (user.getRole().equals("ROLE_USER"))
+				flash.addFlashAttribute("success", "User updated successfully");
+			else
+				flash.addFlashAttribute("success", "Manager updated successfully");
+		}
+		return "redirect:/users/listUsers";
+
+	}
+
 	@PostMapping("/addUser")
 	public String addUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
 						  RedirectAttributes flash, Model model) {
