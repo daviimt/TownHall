@@ -18,7 +18,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/", "/home", "/auth/**", "/about/**", "/error/**", "/webjars/**",
 						"/css/**","/js/**","/assets/**", "/files/**","/icons/**", "/images/**", "/photos/**")
-				.permitAll().requestMatchers("/users/listUsers","/users/formUser/**","/deleteUser/**","/activateUser/**","/users/formUser","/addUser","/addManager","/listUsers","/departments/listDepartments","/departments/formDepartment","/deleteDepartment/**","/departments/formDepartment/**").hasAuthority("ROLE_ADMIN").anyRequest()
+				.permitAll().requestMatchers("/users/listUsers","/users/formUser/**","/deleteUser/**","/activateUser/**","/users/formUser","/addUser","/addManager","/listUsers","/departments/listDepartments","/departments/formDepartment","/deleteDepartment/**","/departments/formDepartment/**","/formPassword/**").hasAuthority("ROLE_ADMIN").anyRequest()
 				.authenticated())
 				.formLogin((form) -> form.loginPage("/auth/login").defaultSuccessUrl("/users/listUsers").permitAll())
 				.logout((logout) -> logout.permitAll().logoutUrl("/auth/logout")

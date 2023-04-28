@@ -20,12 +20,15 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.serviceImpl.UserService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class AdminController {
 
 	private static final String USER_VIEW = "users";
 	private static final String FORM_VIEW = "formUser";
+	private static final String FORM_VIEW_PASSWORD = "formPassword";
 	// Inyectamos el servicio
 
 	@Autowired
@@ -75,7 +78,7 @@ public class AdminController {
 	}
 
 	@GetMapping(value = { "/formUser", "/formUser/{username}" })
-	public String formUser(@PathVariable(name = "username", required = false) String username, Model model) {
+	public String formPassword(@PathVariable(name = "username", required = false) String username, Model model) {
 		if (username != null) {
 			model.addAttribute("user", userService.findUser(username));
 
@@ -84,6 +87,18 @@ public class AdminController {
 		}
 
 		return FORM_VIEW;
+	}
+
+	@GetMapping("/formPassword/{username}")
+	public String formUser(@PathVariable(name = "username", required = false) String username, Model model) {
+		if (username != null) {
+			model.addAttribute("user", userService.findUser(username));
+
+		} else {
+			model.addAttribute("user", new User());
+		}
+
+		return FORM_VIEW_PASSWORD;
 	}
 
 	// Metodo para borrar
