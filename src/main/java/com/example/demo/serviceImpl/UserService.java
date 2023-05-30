@@ -91,7 +91,7 @@ public class UserService implements UserDetailsService {
 		System.out.println(u);
 		user.setId(u.getId());
 		user.setUsername(u.getUsername());
-		user.setPassword(passwordEncoder().encode(u.getPassword()));
+		user.setPassword(u.getPassword());
 		user.setDni(u.getDni());
 		user.setName(u.getName());
 		user.setSurname(u.getSurname());
