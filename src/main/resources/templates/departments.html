@@ -58,7 +58,7 @@
 						<th th:text=${department.description}></th>
 
 						<th><button type="button" class="btn btn-default" data-toggle="modal"
-                                     data-placement="bottom" title="Delete user"
+                                     data-placement="bottom" title="Delete department"
                                      th:data-target="'#delete-modal-' + ${department.id}">
                             <i class="fa-sharp fa-solid fa-trash"></i>
                         </button> <!-- Ventana modal de confirmación de eliminación -->
@@ -90,7 +90,7 @@
                             </div> <a th:href="@{/departments/formDepartment/}+${department.id}">
 								<button type="button" class="btn btn-default"
 									data-toggle="tooltip" data-placement="bottom"
-									title="Desactivar user">
+									title="Update department">
 									<i class="fa-solid fa-pen-to-square"></i>
 								</button>
 						</a></th>
