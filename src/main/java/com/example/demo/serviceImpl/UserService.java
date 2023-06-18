@@ -130,7 +130,6 @@ public class UserService implements UserDetailsService {
 	}
 
 	public com.example.demo.entity.User updateUserWhithoutPassword(com.example.demo.entity.User user) {
-		System.out.println(user);
 		return userRepository.save(user);
 	}
 }

@@ -2,14 +2,10 @@
 <html xmlns:th=http://www.thymeleaf.org
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link th:href="@{/css/bootstrap.css}" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}">
 </head>
 <body>
 <header class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" th:fragment="header" style="width: 100%;margin: 0;">
@@ -41,38 +37,40 @@
 						th:text="'Hello ' + ${#authentication.name}"></a></li>
 					<li sec:authorize="isAuthenticated()" class="nav-item"
 						style="text-align: right">
-                        <button type="button" class="btn btn-default" data-toggle="modal"
-                                data-placement="bottom" title="Log Out"
-                                th:data-target="'#logout-modal'">
-                            <i style="color: white"
-                               class="fa-solid fa-arrow-right-from-bracket"></i>
-                        </button>
-                        <div class="modal fade" th:id="'logout-modal'"
+
+                        <form class="form-inline" th:action="@{/auth/logout}" method="post">
+                            <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-placement="bottom" title="Log Out"
+                                    th:data-target="'#logout-modal'">
+                                <i style="color: white"
+                                   class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </button>
+                            <div class="modal fade" th:id="'logout-modal'"
                                  tabindex="-1" role="dialog" aria-labelledby="logout-modal-label">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Are you
-                                                sure?</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">&iquest;Est&aacute; seguro?</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">Select "Log out" below if you are
-                                            ready to log out</div>
+                                        <div class="modal-body">Selecciona "Confirmar" para cerrar sesi&oacute;n.</div>
                                         <div class="modal-footer">
                                             <form
                                                     th:action="@{/auth/logout}"
                                                     method="post">
                                                 <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Log Out</button>
+                                                        data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Confirmar</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                        </form>
 
 					</li>
 
